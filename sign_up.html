@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>sign up page</title>
+    <style>
+        body{
+           background-color: darkgoldenrod;
+        
+        }
+        .hh{
+            text-align: center;
+        }
+      
+        .f{
+            border: 2px solid black;
+            padding: 2px;
+            margin-right: 20%;
+margin-left: 20%;     
+   }
+        .name,.em,.cou,.date,.pa,.con{
+            font-size: 18px;
+            display: block;
+            text-align: left;
+            margin-top: 10px;
+            margin-right:10px ;
+            margin-left: 27%;
+                }
+#nname,#emm,#countrry,#date,#pass,#passw{
+    width: 50%;
+    box-sizing: border-box;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 9px;
+            margin-left: 27%;
+
+}
+.sub{
+display: block;
+width: 80px;
+height: 50px;
+margin-top:13px ;
+margin-left: 45%;
+}
+.sub:hover{
+    background-color: aqua;
+}
+.index,.log{
+    width: 20%;
+    height: 40px;
+    display: flex;
+border: 2px solid black;
+margin-top: 20px;
+margin-bottom: 20px;
+background-color: rgb(83, 144, 144);
+}
+.index:hover{
+    background-color: rgb(116, 123, 123);
+
+}.log:hover{
+    background-color: rgb(116, 123, 123);
+
+}
+
+    .nameer,.emailer,.dateer,.passworder,.coner,.sel{
+        display: none;
+        color: red;
+        border: 1px solid red;
+        background-color: white;
+        width: 50%;
+        box-sizing: border-box;
+        font-size: 16px;
+            margin-left: 27%;
+    }
+    </style>
+   
+</head>
+    <body>
+        <div class="hh">
+            <h1>Welcome to sign up Page</h1>
+        </div>
+        <div class="sign">
+            <div class="f">
+                <form name="form">
+<label for="Name" class="name">Name</label>
+<input type="text" id="nname" name="fname" placeholder="enter full name" required>
+<span class="nameer" id="nameer"></span>
+<label for="email" class="em">E-mail</label>
+<input type="text" id="emm" placeholder="enter your Email " required>
+<span class="emailer" id="emailer"></span>
+<label for="country" class="cou">country</label>
+<select name="counttry" id="countrry" name="list" required>
+    <option value="null"> </option>
+    </select>
+    <span class="sel" id="sel"></span>
+    <label for="date" class="date">Birthday</label>
+    <input type="text" id="date" placeholder="enter Birth date " required>
+    <span class="dateer" id="dateer"></span>
+    <label for="password" class="pa">Password</label>
+<input type="password" id="pass" placeholder="enter your password" required>
+<span class="passworder" id="passworder"></span>
+<label for="con" class="con">Confirm password</label>
+<input type="password" id="passw" placeholder="confirm your password" required>
+<span class="coner" id="coner"></span>
+<input type="submit" class="sub" value="sign up">
+                </form>
+            </div>
+        </div>
+        <div class="index">
+            <a href="index.html">Back to index page</a>
+        </div>
+        <div class="log">
+            <a href="log_in.html">Back to log in page</a>
+        </div>    
+        <script>
+                     let countriesData; 
+
+             async function fetchCountriesData() {
+            const resp = await fetch('https://restcountries.com/v3.1/all');
+            countriesData = await resp.json();
+            const countrySelect = document.getElementById("countrry");
+
+            countriesData.forEach((country) => {
+                const option = document.createElement('option');
+                option.value = country.name.common;
+                option.textContent = country.name.common;
+                countrySelect.appendChild(option);
+            });
+        }
+        async function isvalidcountry() {
+            const countrySelect = document.getElementById("countrry");
+            return countrySelect.value !== "null";
+        }
+           
+
+          
+        function isValidFullName() {
+            let x=document.getElementById("nname").value;
+
+          const ffname = x.split(' ');
+          return ffname.length === 2 && isNaN(ffname[0]) && isNaN(ffname[1]);
+          }
+          function isvalidate_date(date){
+            const currentDate = new Date();
+            const dateParts = date.split(/[\/-]/); 
+          
+            const year = parseInt(dateParts[0]);
+            const month = parseInt(dateParts[1]);
+            const day = parseInt(dateParts[2]);
+          
+            const inputDate = new Date(year, month - 1, day); 
+          
+            const ageDifference = currentDate - inputDate;
+            const ageInYears = ageDifference / (1000 * 60 * 60 * 24 * 365);
+            return ageInYears >= 18;
+        }
+        function confirm(pass,confirmm)
+        {
+               return pass === confirmm;
+                            
+
+        }
+        let isCountryValid = false; 
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const emailInput = document.getElementById("emm");
+        const name=document.getElementById("nname");
+           const password=document.getElementById("pass");
+           const date=document.getElementById("date");
+           const confirmm=document.getElementById("passw");
+           let emailerror=document.getElementById("emailer");
+           let nameerror=document.getElementById("nameer");
+           let passworderror=document.getElementById("passworder");
+           let dateerror=document.getElementById("dateer");
+           let confirmerror=document.getElementById("coner");
+           const countrySelect = document.getElementById("countrry");
+            let countryValid = false;
+            fetchCountriesData();
+
+       
+         async   function validateForm() {
+                const isCountryValid = await isvalidcountry();
+
+                if (!isvalidate_email(emailInput.value)) {
+                   
+                    emailerror.textContent="invalid email";
+                    emailerror.style.display="block";
+                    emailInput.style.color="red";
+                }
+              
+                if(!isvalidate_password(password.value)){
+                   
+                  passworderror.textContent="not valid password";
+                  passworderror.style.display="block";
+                  password.style.color="red";
+
+                }
+                if(!isValidFullName(name.value)){
+                   
+                    nameerror.textContent="invalid name";
+                    nameerror.style.display="block";
+                    name.style.color="red";
+
+
+                }
+                
+                if(!isvalidate_date(date.value)){
+                   
+                    dateerror.textContent="your age is less than 18";
+                    dateerror.style.display="block";
+                    date.style.color="red";
+
+
+                }
+                if(!confirm(password.value,confirmm.value)){
+                    
+                    confirmerror.textContent="Password and Confirm Password do not match message";
+                    confirmerror.style.display="block";
+                    confirmm.style.color="red";
+
+                }
+                if(isValidFullName(name.value) && isvalidate_date(date.value) && isCountryValid && isvalidate_email(emailInput.value) && isvalidate_password(password.value) && confirm(password.value,confirmm.value)){
+                    form.reset();
+                }
+            }
+            const form = document.forms["form"];
+            const selecterror=document.getElementById("countrry");
+            let selecterror2=document.getElementById("sel");
+            form.addEventListener("submit", async function (event) {
+
+                event.preventDefault();
+                validateForm();
+
+                 isCountryValid = await isvalidcountry();
+                if (!isCountryValid) {
+                    
+                    selecterror2.textContent="select country !";
+                    selecterror2.style.display="block";
+
+                    selecterror.style.color='red';
+                }
+            });
+        });
+        </script>
+        <script src="validate.js"></script>
+            
+    </body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Log in page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("Capture.PNG");
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+        .all {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; 
+        }
+        .labeform {
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); 
+        }
+        h1 {
+            text-align: center;
+        }
+        .email, .pass {
+            font-size: 18px;
+            display: block;
+            text-align: left;
+            margin-top: 10px;
+        }
+        #emm, #pass {
+            width:100%;
+            display: block;
+            box-sizing: border-box;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 9px;
+        }
+       
+        .sub {
+            display: block;
+            padding: 15px;
+        }
+        .sub:hover{
+            background-color: aqua;
+        }
+        
+.index:hover{
+    background-color: rgb(116, 123, 123);
+
+}.sign:hover{
+    background-color: rgb(116, 123, 123);
+
+}
+        .signup-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .signup-link a {
+            text-decoration: underline;
+        }
+        .index,.sign{
+    width: 20%;
+    height: 30px;
+    display: block;
+border: 2px solid black;
+margin-top: -6%;
+margin-bottom: 6%;
+background-color: rgb(55, 116, 116);
+}
+.emerr,.passerr{
+    color:red;
+    border: 1px solid red;
+    display: none;
+}
+    </style>
+
+</head>
+<body>
+    <div class="all">
+        <div class="labeform">
+            <div class="h">
+                <h1>Welcome to the Log in Page</h1>
+            </div>
+            <form name="form">
+                <label for="email" class="email">E-mail</label>
+                <input type="text" id="emm" name="em" placeholder="enter your email" required>
+                <span class="emerr" id="emer"></span>
+                <label for="Password" class="pass">Password</label>
+                <input type="password" id="pass" name="pass" placeholder="enter your Password" required>
+                <span class="passerr" id="passer"></span>
+
+                <input type="submit" value="Log In" class="sub">
+            </form>
+            <div class="signup-link">
+                Don't have an account? <a href="sign_up.html">Sign up</a>
+            </div>
+        </div>
+    </div>
+    <div class="index">
+        <a href="index.html">Back to index page</a>
+    </div>
+    <div class="sign">
+        <a href="sign_up.html">Go to Sign up page</a>
+    </div>  
+    <script src="validate.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const emailInput = document.getElementById("emm");
+       const password=document.getElementById("pass");
+       let emailerr=document.getElementById("emer");
+
+       let passerror=document.getElementById("passer");
+
+        function validateForm() {
+            if (!isvalidate_email(emailInput.value)) {
+               
+            
+                emailerr.textContent="not valid input";
+                emailerr.style.display="block";
+                emailInput.style.color = "red"; 
+            }
+          
+            if(!isvalidate_password(password.value)){
+            
+           
+                passerror.textContent="not valid input";
+                passerror.style.display="block";
+                password.style.color = "red"; 
+
+
+
+            }
+            if(isvalidate_email(emailInput.value) && isvalidate_password(password.value)){
+
+                form.reset();
+            }
+         
+        }
+            
+        
+        const form = document.forms["form"];
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            validateForm(); 
+        });
+    });
+    </script>
+</body>
+</html>

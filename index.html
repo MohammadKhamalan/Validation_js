@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Index page</title>
+    <style>
+        body {
+            background-color: rgb(15, 78, 110);
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: white;
+        }
+
+        h2 {
+            color: white;
+            margin-top: 30px;
+        }
+
+        .log,
+        .sign {
+            display: inline-block;
+            padding: 10px 20px;
+            border: 2px solid peru;
+            color: black;
+            background-color: peru;
+            text-decoration: none;
+            margin: 10px;
+        }
+.ani{
+    position: relative;
+  width: 200px;
+  height: 200px;
+  background-color: #007bff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 40%;
+  margin-top: 10%;
+  animation: spin 3s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  25%{
+    transform: rotate(125deg);
+
+  }
+  50%{
+    transform: rotate(180deg);
+  }
+  75%{
+    transform: rotate(0deg);
+
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+
+    }    .log:hover,
+        .sign:hover {
+            border: 4px solid rgb(192, 250, 255);
+            background-color: rgb(192, 250, 255);
+        }
+    </style>
+</head>
+<body>
+    <div class="h">
+        <h1>Welcome to the Index Page</h1>
+    </div>
+    <h2>Where do you want to go?</h2>
+    <a href="log_in.html" class="log">Go to Log In page</a>
+    <a href="sign_up.html" class="sign">Go to Sign Up page</a>
+    <div class="ani">Welcome</div>
+</body>
+</html>
